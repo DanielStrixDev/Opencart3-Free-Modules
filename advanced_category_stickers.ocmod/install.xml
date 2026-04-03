@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name><![CDATA[Advanced Category Stickers]]></name>
+    <code>advanced_category_stickers</code>
+    <version><![CDATA[1.0.0]]></version>
+    <author><![CDATA[Daniel_STRIXS.eu]]></author>
+    <link>www.strixs.eu</link>
+    <!-- Product Search -->
+    <file path="catalog/controller/product/category.php">
+        <operation>
+            <search><![CDATA[$data['products'][] = array(]]></search>
+            <add position="before"><![CDATA[
+                // Get category sticker for this product if module is enabled
+                $this->load->model('extension/module/advanced_category_stickers');
+
+                $category_sticker = false;
+                if ($this->config->get('module_advanced_category_stickers_status')) {
+                    $category_sticker = $this->model_extension_module_advanced_category_stickers->productHasStickerCategory($result['product_id']);
+                }
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA['product_id'  => $result['product_id'],]]></search>
+            <add position="after"><![CDATA[
+                'category_sticker'  => $category_sticker,
+            ]]></add>
+        </operation>
+    </file>
+    <!-- Product Category -->
+    <file path="catalog/controller/product/category.php">
+        <operation>
+            <search><![CDATA[$data['products'][] = array(]]></search>
+            <add position="before"><![CDATA[
+                // Get category sticker for this product if module is enabled
+                $this->load->model('extension/module/advanced_category_stickers');
+
+                $category_sticker = false;
+                if ($this->config->get('module_advanced_category_stickers_status')) {
+                    $category_sticker = $this->model_extension_module_advanced_category_stickers->productHasStickerCategory($result['product_id']);
+                }
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA['product_id'  => $result['product_id'],]]></search>
+            <add position="after"><![CDATA[
+                'category_sticker'  => $category_sticker,
+            ]]></add>
+        </operation>
+    </file>
+    <!-- Module Feautured -->
+    <file path="catalog/controller/extension/module/featured.php">
+        <operation>
+            <search><![CDATA[$data['products'][] = array(]]></search>
+            <add position="before"><![CDATA[
+                // Get category sticker for this product if module is enabled
+                $this->load->model('extension/module/advanced_category_stickers');
+
+                $category_sticker = false;
+                if ($this->config->get('module_advanced_category_stickers_status')) {
+                    $category_sticker = $this->model_extension_module_advanced_category_stickers->productHasStickerCategory($product_info['product_id']);
+                }
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA['product_id'  => $product_info['product_id'],]]></search>
+            <add position="after"><![CDATA[
+                'category_sticker'  => $category_sticker,
+            ]]></add>
+        </operation>
+    </file>
+    <!-- Product > Product -->
+    <file path="catalog/controller/product/product.php">
+        <operation>
+            <search><![CDATA[$data['products'][] = array(]]></search>
+            <add position="before"><![CDATA[
+                // Get category sticker for this product if module is enabled
+                $this->load->model('extension/module/advanced_category_stickers');
+
+                $category_sticker = false;
+                if ($this->config->get('module_advanced_category_stickers_status')) {
+                    $category_sticker = $this->model_extension_module_advanced_category_stickers->productHasStickerCategory($result['product_id']);
+                }
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA['product_id'  => $result['product_id'],]]></search>
+            <add position="after"><![CDATA[
+                'category_sticker'  => $category_sticker,
+            ]]></add>
+        </operation>
+    </file>
+
+    <!-- Product Search -->
+    <file path="catalog/controller/product/search.php">
+        <operation>
+            <search><![CDATA[$data['products'][] = array(]]></search>
+            <add position="before"><![CDATA[
+                // Get category sticker for this product if module is enabled
+                $this->load->model('extension/module/advanced_category_stickers');
+
+                $category_sticker = false;
+                if ($this->config->get('module_advanced_category_stickers_status')) {
+                    $category_sticker = $this->model_extension_module_advanced_category_stickers->productHasStickerCategory($result['product_id']);
+                }
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA['product_id'  => $result['product_id'],]]></search>
+            <add position="after"><![CDATA[
+                'category_sticker'  => $category_sticker,
+            ]]></add>
+        </operation>
+    </file>
+
+    <!-- Product images -->
+    <file path="catalog/view/theme/*/template/product/category.twig">
+        <operation>
+            <search index="0"><![CDATA[<img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" />]]></search>
+            <add position="replace"><![CDATA[
+            {% if product.category_sticker %}
+                <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" />
+                <div class="image-overlay">
+                <div class="overlay-text">{{ product.category_sticker }}</div>
+                </div>
+            {% else %}
+                <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" />
+            {% endif %}
+           ]]>
+            </add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/*/template/product/search.twig">
+        <operation>
+            <search index="0"><![CDATA[<img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" />]]></search>
+            <add position="replace"><![CDATA[
+            {% if product.category_sticker %}
+                <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" />
+                <div class="image-overlay">
+                <div class="overlay-text">{{ product.category_sticker }}</div>
+                </div>
+            {% else %}
+                <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" />
+            {% endif %}
+           ]]>
+            </add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/*/template/extension/module/featured.twig">
+        <operation>
+            <search index="0"><![CDATA[<img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" />]]></search>
+            <add position="replace"><![CDATA[
+            {% if product.category_sticker %}
+                <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" />
+                <div class="image-overlay">
+                <div class="overlay-text">{{ product.category_sticker }}</div>
+                </div>
+            {% else %}
+                <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" />
+            {% endif %}
+           ]]>
+            </add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/*/template/product/product.twig">
+        <operation>
+            <search index="0"><![CDATA[<img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" />]]></search>
+            <add position="replace"><![CDATA[
+            {% if product.category_sticker %}
+                <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" />
+                <div class="image-overlay">
+                <div class="overlay-text">{{ product.category_sticker }}</div>
+                </div>
+            {% else %}
+                <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" />
+            {% endif %}
+           ]]>
+            </add>
+        </operation>
+    </file>
+
+    <!-- CSS -->
+    <file path="catalog/view/theme/default/template/common/header.twig">
+        <operation>
+            <search index="0"><![CDATA[<link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">]]></search>
+            <add position="after"><![CDATA[
+<link href="catalog/view/theme/default/stylesheet/advanced_category_stickers.css" rel="stylesheet">]]></add>
+        </operation>
+    </file>
+</modification>
