@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name><![CDATA[Smart Orders - Bought Together]]></name>
+    <code>smart_orders_bought_together</code>
+    <version><![CDATA[1.0.0]]></version>
+    <author><![CDATA[Daniel_STRIXS.eu]]></author>
+    <link></link>
+
+    
+    <file path="catalog/controller/product/product.php">
+        <operation>
+            <search index="0"><![CDATA[if ($this->config->get('config_tax')) {]]></search>
+            <add position="before"><![CDATA[
+            // Smart Orders Bought Together Module
+            if ($this->config->get('module_smart_orders_bought_together_status')) {
+                $this->load->model('extension/module/smart_orders_bought_together');
+                $data['smart_orders_bought_together'] = $this->load->controller('extension/module/smart_orders_bought_together', $product_info['product_id']);
+            } else {
+                $data['smart_orders_bought_together'] = '';
+            }
+            ]]></add>
+        </operation>
+    </file>
+    
+    <file path="catalog/view/theme/*/template/product/product.twig">
+        <operation>
+            <search index="0"><![CDATA[<ul class="nav nav-tabs">]]></search>
+            <add position="before"><![CDATA[
+        {% if smart_orders_bought_together %}
+            {{ smart_orders_bought_together }}
+        {% endif %}
+            ]]></add>
+        </operation>
+    </file>
+    
+</modification>
