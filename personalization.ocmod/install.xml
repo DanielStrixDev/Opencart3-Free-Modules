@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name><![CDATA[Orders Personalization]]></name>
+    <code>personalization</code>
+    <version><![CDATA[1.0.0]]></version>
+    <author><![CDATA[Daniel_STRIXS.eu]]></author>
+    <link>www.strixs.eu</link>
+
+    <!--
+    <file path="catalog/view/theme/*/template/common/footer.twig">
+       <operation>
+           <search><![CDATA[
+                
+           ]]></search>
+           <add position="before"><![CDATA[
+                
+           ]]></add>
+       </operation>
+    </file>
+    -->
+</modification>

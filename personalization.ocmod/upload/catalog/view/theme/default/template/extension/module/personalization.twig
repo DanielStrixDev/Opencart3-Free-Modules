@@ -1,0 +1,42 @@
+{% if style %}
+<link rel="stylesheet" type="text/css" href="{{ style }}" />
+{% endif %}
+
+{% if products %}
+<div class="personalization-module">
+  <h3>{{ heading_title }}</h3>
+  <div class="swiper-container">
+    <div class="swiper personalization-swiper">
+      <div class="swiper-wrapper">
+      {% for product in products %}
+      <div class="swiper-slide">
+        <div class="product-card">
+          <div class="product-image">
+            <a href="{{ product.href }}">
+              <img src="{{ product.thumb }}" alt="{{ product.name }}" />
+            </a>
+          </div>
+          <div class="product-info">
+            <h4 class="product-name">
+              <a href="{{ product.href }}">{{ product.name }}</a>
+            </h4>
+            <div class="product-price">{{ product.price }}</div>
+            <button type="button" class="add-to-cart-btn" onclick="cart.add('{{ product.product_id }}');">
+              <i class="fa fa-shopping-cart"></i> Купи
+            </button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+</div>
+{% endif %}
+
+{% if script %}
+<script type="text/javascript" src="{{ script }}"></script>
+{% endif %}
